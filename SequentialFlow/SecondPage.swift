@@ -10,8 +10,14 @@ import SwiftUI
 struct SecondPage: View {
     
     @Binding var lastName: String
-    
+    @Binding var tagIndex: Int
+
     var body: some View {
-        TextField("Enter last name", text: $lastName)
+        VStack(spacing: 16) {
+            TextField("Enter last name", text: $lastName)
+            Button("Next") {
+                tagIndex = 2
+            }
+        }
     }
 }

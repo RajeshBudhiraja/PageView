@@ -10,14 +10,27 @@ import CoreData
 
 struct ContentView: View {
     
-    @State var firstName: String
-    @State var lastName: String
+    @State var firstName: String = ""
+    @State var lastName: String = ""
+    
+    @State var currentTag: Int = 0
     
     var body: some View {
-        NavigationView {
-            TabView {
-                FirstPage(firstName: $firstName)
-                SecondPage(lastName: $lastName)
+        NavigationView() {
+            if currentTag <= 1 {
+                TabView(selection: $currentTag) {
+                    FirstPage(firstName: $firstName,
+                              tagIndex: $currentTag)
+                    .padding()
+                    .tag(0)
+                    SecondPage(lastName: $lastName,
+                               tagIndex: $currentTag)
+                    .padding()
+                    .tag(1)
+                }
+            } else {
+                Text(firstName + " " + lastName)
+                    .padding()
             }
         }
     }
